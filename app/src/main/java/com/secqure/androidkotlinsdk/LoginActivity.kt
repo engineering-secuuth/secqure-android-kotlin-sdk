@@ -1,4 +1,4 @@
-package com.secqure.secqureauth
+package com.secqure.androidkotlinsdk
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -18,12 +18,14 @@ import android.content.SharedPreferences
 import android.os.StrictMode
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
+import com.secqure.androidkotlinsdk.R
+import com.secqure.secqureauth.*
 import okhttp3.Response
 import org.json.JSONException
 import org.json.JSONObject
 
-private const val TAG = "AuthActivity"
-class AuthActivity : AppCompatActivity() {
+private const val TAG = "LoginActivity"
+class LoginActivity : AppCompatActivity() {
 
     private lateinit var callbackActivity: String
     private lateinit var secqureWebSDKURL: String
@@ -34,7 +36,7 @@ class AuthActivity : AppCompatActivity() {
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_auth)
+        setContentView(R.layout.activity_login)
 
         secqureWebSDKURL = intent.getStringExtra(SECQURE_WEBSDK_URL).toString()
         callbackActivity = intent.getStringExtra(CALLBACK_ACTIVITY_NAME).toString()
@@ -82,11 +84,11 @@ class AuthActivity : AppCompatActivity() {
     }
 
     private fun returnPayloadToCallbackActivity(payload: String) {
-        Log.d("AuthActivity", "Payload received: " + payload)
+        Log.d("LoginActivity", "Payload received: " + payload)
 //        storeInSharedPrefs(payload)
-//        Log.d("AuthActivity", "Payload from shared pref: " + retrieveFromSharedPreferences())
-        SharedPrefUtils().putInSharedPrefs(this@AuthActivity, payload)
-        Log.d("AuthActivity", "Payload from shared pref: " + SharedPrefUtils().getFromSharedPrefs(this@AuthActivity, "userIdentity"))
+//        Log.d("LoginActivity", "Payload from shared pref: " + retrieveFromSharedPreferences())
+        SharedPrefUtils().putInSharedPrefs(this@LoginActivity, payload)
+        Log.d("LoginActivity", "Payload from shared pref: " + SharedPrefUtils().getFromSharedPrefs(this@LoginActivity, "userIdentity"))
         val intent = Intent(this, Class.forName(callbackActivity)).apply {
             flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
             putExtra(LOGIN_SUCCESS_MESSAGE, payload)

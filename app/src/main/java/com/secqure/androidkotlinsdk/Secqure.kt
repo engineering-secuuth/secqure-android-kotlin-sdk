@@ -8,7 +8,7 @@ import androidx.core.content.ContextCompat.startActivity
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
-import com.secqure.androidsdk.models.FetchTokensResp
+import com.secqure.androidkotlinsdk.LoginActivity
 import okhttp3.Response
 import org.json.JSONObject
 
@@ -21,7 +21,7 @@ class Secqure (private val mContext: Context, private val apiKey: String, privat
 //        val secuuthWebSDKURL = "http://192.168.43.143:5000/auth/getLoginWebview?keyId="+ apiKey + "&profileName=Default"
 //        val secuuthWebSDKURL = "https://dev.secuuth.io/HTML/index-new.html"
 //        val secuuthWebSDKURL = "https://websdk.sawolabs.com/?apiKey=$apiKey&apiKeySecret=$apiKeySecret&identifierType=$identifierType&webSDKVariant=android"
-        val intent = Intent(mContext, AuthActivity::class.java).apply {
+        val intent = Intent(mContext, LoginActivity::class.java).apply {
             putExtra(SECQURE_WEBSDK_URL, secuuthWebSDKURL)
             putExtra(CALLBACK_ACTIVITY_NAME, callBackClass)
         }
@@ -64,7 +64,7 @@ class Secqure (private val mContext: Context, private val apiKey: String, privat
     private fun freshLogin(callBackClass: String) {
         Log.d("Secqure", "Secqure invoked...")
         val secuuthWebSDKURL = "http://192.168.43.143:8082/webview.html"
-        val intent = Intent(mContext, AuthActivity::class.java).apply {
+        val intent = Intent(mContext, LoginActivity::class.java).apply {
             putExtra(SECQURE_WEBSDK_URL, secuuthWebSDKURL)
             putExtra(CALLBACK_ACTIVITY_NAME, callBackClass)
         }
