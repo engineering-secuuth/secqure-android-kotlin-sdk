@@ -1,0 +1,9 @@
+package com.secqure.secqureauth
+
+const val SECQURE_WEBSDK_URL = "SECQURE_WEBSDK_URL"
+const val CALLBACK_ACTIVITY_NAME = "CALLBACK_ACTIVITY_NAME"
+const val SHARED_PREF_FILENAME = "SECQURE_SHARED_PREF_FILE"
+const val SHARED_PREF_DEVICE_ID = "SECQURE_SHARED_PREF_FILE"
+const val LOGIN_SUCCESS_MESSAGE = "LOGIN_SUCCESS_MESSAGE"
+const val SECQURE_API_URL = "http://192.168.43.143:5000"
+//const val SECQURE_API_URL = "https://test-api.secuuth.io"
