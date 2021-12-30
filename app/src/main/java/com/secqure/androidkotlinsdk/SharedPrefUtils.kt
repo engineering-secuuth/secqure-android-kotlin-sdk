@@ -12,8 +12,8 @@ class SharedPrefUtils() {
 
     public fun putInSharedPrefs(context : Context, payload: String) {
         val respPayload: JsonObject = JsonParser().parse(payload).asJsonObject
-        val user: JsonObject = JsonParser().parse(respPayload.get("user").toString()).asJsonObject
-        val tokens: JsonObject = JsonParser().parse(respPayload.get("tokens").toString()).asJsonObject
+        val user: JsonObject = JsonParser().parse(respPayload.get(SECQURE_USER).toString()).asJsonObject
+        val tokens: JsonObject = JsonParser().parse(respPayload.get(SECQURE_TOKENS).toString()).asJsonObject
 
         Log.d("JSON_Payload", respPayload.toString())
         Log.d("JSON_Payload_user", respPayload.get("user").toString())
@@ -23,15 +23,15 @@ class SharedPrefUtils() {
         val sharedPreferences: SharedPreferences
         val sharedPrefEditor: SharedPreferences.Editor
 //        sharedPreferences = getSharedPreferences("secqurePref_payload", MODE_PRIVATE)
-        sharedPreferences = context.getSharedPreferences("com.secqure.androidsdk.SECQURE_SHARED_PREF", Context.MODE_PRIVATE)
+        sharedPreferences = context.getSharedPreferences(SHARED_PREF_FILENAME, Context.MODE_PRIVATE)
 //        sharedPreferences = getSharedPreferences("com.secqure.androidsdk.SECQURE_SHARED_PREF",
 //            AppCompatActivity.MODE_PRIVATE
 //        )
         sharedPrefEditor = sharedPreferences.edit()
         try {
 //            sharedPrefEditor.putString("token", payload)
-            sharedPrefEditor.putString("userIdentity", user.toString())
-            sharedPrefEditor.putString("refreshToken", tokens.get("refreshToken").asString)
+            sharedPrefEditor.putString(SECQURE_USER_IDENTITY, user.toString())
+            sharedPrefEditor.putString(SECQURE_REFRESH_TOKEN, tokens.get(SECQURE_REFRESH_TOKEN).asString)
             Log.d("Login", payload)
             sharedPrefEditor.commit()
         } catch (e: JSONException) {
@@ -50,14 +50,14 @@ class SharedPrefUtils() {
         val sharedPreferences: SharedPreferences
         val sharedPrefEditor: SharedPreferences.Editor
 //        sharedPreferences = getSharedPreferences("secqurePref_payload", MODE_PRIVATE)
-        sharedPreferences = context.getSharedPreferences("com.secqure.androidsdk.SECQURE_SHARED_PREF", Context.MODE_PRIVATE)
+        sharedPreferences = context.getSharedPreferences(SHARED_PREF_FILENAME, Context.MODE_PRIVATE)
 //        sharedPreferences = getSharedPreferences("com.secqure.androidsdk.SECQURE_SHARED_PREF",
 //            AppCompatActivity.MODE_PRIVATE
 //        )
         sharedPrefEditor = sharedPreferences.edit()
         try {
 //            sharedPrefEditor.putString("token", payload)
-            sharedPrefEditor.putString("refreshToken", respPayload.get("refreshToken").asString)
+            sharedPrefEditor.putString(SECQURE_REFRESH_TOKEN, respPayload.get(SECQURE_REFRESH_TOKEN).asString)
             Log.d("Login", payload)
             sharedPrefEditor.commit()
         } catch (e: JSONException) {
@@ -69,7 +69,7 @@ class SharedPrefUtils() {
 //        val sharedPreferences = getSharedPreferences("com.secqure.androidsdk.SECQURE_SHARED_PREF",
 //            AppCompatActivity.MODE_PRIVATE
 //        )
-        val sharedPreferences = context.getSharedPreferences("com.secqure.androidsdk.SECQURE_SHARED_PREF", Context.MODE_PRIVATE)
+        val sharedPreferences = context.getSharedPreferences(SHARED_PREF_FILENAME, Context.MODE_PRIVATE)
         Log.d("JSON_Payload", "sharedPreferences : " + sharedPreferences)
         val value = sharedPreferences.getString(key, null).toString()
         Log.d("JSON_Payload", key + " : " + value)

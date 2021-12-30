@@ -30,17 +30,14 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var callbackActivity: String
     private lateinit var secqureWebSDKURL: String
     private lateinit var mWebView: WebView
-    private var iskeyExist: Boolean = false
-//    private var isKeystoreSupported: Boolean = false
 
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        secqureWebSDKURL = intent.getStringExtra(SECQURE_WEBSDK_URL).toString()
-        callbackActivity = intent.getStringExtra(CALLBACK_ACTIVITY_NAME).toString()
-
+        secqureWebSDKURL = intent.getStringExtra("SECQURE_WEBSDK_URL").toString()
+        callbackActivity = intent.getStringExtra("CALLBACK_ACTIVITY_NAME").toString()
 
         val connectionManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val networkInfo = connectionManager.activeNetworkInfo
@@ -84,11 +81,8 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun returnPayloadToCallbackActivity(payload: String) {
-        Log.d("LoginActivity", "Payload received: " + payload)
-//        storeInSharedPrefs(payload)
-//        Log.d("LoginActivity", "Payload from shared pref: " + retrieveFromSharedPreferences())
+        Log.d("AuthActivity", "Payload received: " + payload)
         SharedPrefUtils().putInSharedPrefs(this@LoginActivity, payload)
-        Log.d("LoginActivity", "Payload from shared pref: " + SharedPrefUtils().getFromSharedPrefs(this@LoginActivity, "userIdentity"))
         val intent = Intent(this, Class.forName(callbackActivity)).apply {
             flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
             putExtra(LOGIN_SUCCESS_MESSAGE, payload)

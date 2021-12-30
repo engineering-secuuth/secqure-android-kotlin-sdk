@@ -18,8 +18,7 @@ class APIClient() {
     private var request: Request? = null
     private val gson = Gson()
     @Throws(IOException::class)
-    fun executePost(resourcePath: String, payload: JSONObject?): Response {
-//        executeGet("http://192.168.43.143:8082/webview.html", "")
+    fun executePost(resourcePath: String, payload: JSONObject?, apiKey: String, secretKey: String): Response {
         Log.d("Secuuth-SDK", "executePost invoked")
         val httpClient: OkHttpClient = OkHttpClient().newBuilder()
             .connectTimeout(15, TimeUnit.SECONDS)
@@ -37,6 +36,7 @@ class APIClient() {
         Log.d("Secuuth-SDK", url)
         //        Log.d("Secuuth-SDK", mbody.toString());
         request = Request.Builder()
+            .addHeader("keyid", apiKey)
             .url(url)
             .post(mbody)
             .build()
