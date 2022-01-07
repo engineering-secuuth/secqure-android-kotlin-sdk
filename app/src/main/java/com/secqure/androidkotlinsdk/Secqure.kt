@@ -30,6 +30,7 @@ class Secqure (private val mContext: Context, private val apiKey: String, privat
             val shPref_userIdentity = SharedPrefUtils().getFromSharedPrefs(mContext, SECQURE_USER_IDENTITY)
             val pubKey = (JsonParser().parse(shPref_userIdentity).asJsonObject).get(SECQURE_PUB_KEY).asString
             val subKey = (JsonParser().parse(shPref_userIdentity).asJsonObject).get(SECQURE_SYSTEM_ID).asString
+
             val bodyParams = JSONObject()
             bodyParams.put(SECQURE_PUBLIC_KEY, pubKey)
             bodyParams.put(SECQURE_USER_SUB_ID, subKey)
@@ -40,7 +41,7 @@ class Secqure (private val mContext: Context, private val apiKey: String, privat
                 SharedPrefUtils().putInRefreshTokenInSharedPrefs(mContext, jsonDataString.toString())
                 val intent = Intent(mContext, Class.forName(callBackClass)).apply {
                     flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-                    putExtra(LOGIN_SUCCESS_MESSAGE, response.toString())
+                    putExtra(LOGIN_SUCCESS_MESSAGE, jsonDataString.toString())
                 }
                 mContext.startActivity(intent)
             } else {
