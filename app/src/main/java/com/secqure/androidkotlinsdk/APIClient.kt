@@ -13,13 +13,13 @@ import okhttp3.Request
 import okhttp3.RequestBody
 import okhttp3.Response
 
+private const val TAG = "APIClient"
 class APIClient() {
     private var mbody: RequestBody? = null
     private var request: Request? = null
     private val gson = Gson()
     @Throws(IOException::class)
     fun executePost(resourcePath: String, payload: JSONObject?, apiKey: String, secretKey: String): Response {
-        Log.d("Secuuth-SDK", "executePost invoked")
         val httpClient: OkHttpClient = OkHttpClient().newBuilder()
             .connectTimeout(15, TimeUnit.SECONDS)
             .readTimeout(15, TimeUnit.SECONDS)
@@ -31,9 +31,6 @@ class APIClient() {
         } else {
             mbody = RequestBody.create(mediaType, "{}")
         }
-        Log.d("Secuuth-SDK", payload.toString())
-        Log.d("Secuuth-SDK", mbody.toString())
-        Log.d("Secuuth-SDK", url)
         //        Log.d("Secuuth-SDK", mbody.toString());
         request = Request.Builder()
             .addHeader("keyid", apiKey)
@@ -50,7 +47,7 @@ class APIClient() {
             Log.d("Secuuth-SDK-response", "Successful response")
             response
         } else { // Failure
-            Log.d("Secuuth-SDK-response", "Failed response")
+            Log.d(TAG, "Failed response while renewing tokens")
             response
         }
     }
@@ -72,7 +69,6 @@ class APIClient() {
         println("initAuth Response: " + response.body()?.string())
         Log.d("Secuuth-SDK-response", response.toString())
         return if (response.isSuccessful()) { // Success
-            Log.d("Secuuth-SDK-response", "Successful response")
             response
         } else { // Failure
             Log.d("Secuuth-SDK-response", "Failed response")

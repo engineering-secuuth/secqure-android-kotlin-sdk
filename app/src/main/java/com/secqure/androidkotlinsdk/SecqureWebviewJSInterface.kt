@@ -10,7 +10,6 @@ class SecqureWebviewJSInterface (
 ) {
     @JavascriptInterface
     fun handlePostSubmit(payload: String) {
-        Log.d("JSCallback", "Payload received: " + payload)
         returnPayloadToCallbackActivity(payload)
     }
 

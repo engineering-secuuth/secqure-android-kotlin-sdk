@@ -81,7 +81,6 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun returnPayloadToCallbackActivity(payload: String) {
-        Log.d("AuthActivity", "Payload received: " + payload)
         SharedPrefUtils().putInSharedPrefs(this@LoginActivity, payload)
         val intent = Intent(this, Class.forName(callbackActivity)).apply {
             flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
@@ -95,10 +94,6 @@ class LoginActivity : AppCompatActivity() {
         val respPayload: JsonObject = JsonParser().parse(payload).asJsonObject
         val user: JsonObject = JsonParser().parse(respPayload.get("user").toString()).asJsonObject
         val tokens: JsonObject = JsonParser().parse(respPayload.get("tokens").toString()).asJsonObject
-
-        Log.d("JSON_Payload", respPayload.toString())
-        Log.d("JSON_Payload_user", respPayload.get("user").toString())
-        Log.d("JSON_Payload_user", user.get("pubKey").toString())
 
         val sharedPreferences: SharedPreferences
         val sharedPrefEditor: SharedPreferences.Editor
