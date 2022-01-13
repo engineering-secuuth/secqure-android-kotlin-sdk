@@ -51,7 +51,7 @@ class Secqure (private val mContext: Context, private val apiKey: String, privat
     }
 
     private fun freshLogin(callBackClass: String) {
-        val secuuthWebSDKURL = SECQURE_WEBSDK_URL + "?keyId=$apiKey&profileName=Default"
+        val secuuthWebSDKURL = SECQURE_WEBSDK_URL + "?keyId=$apiKey&profileName=Default&clientType=Android"
         val intent = Intent(mContext, LoginActivity::class.java).apply {
             putExtra("SECQURE_WEBSDK_URL", secuuthWebSDKURL)
             putExtra("CALLBACK_ACTIVITY_NAME", callBackClass)
